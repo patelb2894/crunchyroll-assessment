@@ -15,12 +15,22 @@ async function getCharacters() {
   return await makeApiRequest(endpoints.people);
 }
 
+async function getCharacter(characterName) {
+  return await makeApiRequest(`${endpoints.people}?search=${encodeURIComponent(characterName)}`)
+}
+
 async function getFilms() {
   return await makeApiRequest(endpoints.films);
 }
 
+async function getFilm(filmTitle) {
+  return await makeApiRequest(`${endpoints.films}?search=${encodeURIComponent(filmTitle)}`)
+}
+
 module.exports = {
   getCharacters,
+  getCharacter,
   getFilms,
+  getFilm,
 };
 

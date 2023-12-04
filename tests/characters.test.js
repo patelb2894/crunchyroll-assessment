@@ -1,6 +1,7 @@
-const { getCharacters } = require('../utils/api.js');
+const { getCharacters, getCharacter } = require('../utils/api-utils.js');
 const { expect } = require('chai');
 const axios = require('axios');
+const { characterData } = require('../utils/constants.cjs');
 
 describe('Star Wars Characters Test', () => {
   it('should retrieve a list of all Star Wars characters', async () => {
@@ -24,7 +25,7 @@ describe('Star Wars Characters Test', () => {
 
     try {
       // Make a request to the Star Wars API for the specific character
-      const response = await axios.get(`https://swapi.dev/api/people/?search=${encodeURIComponent(characterName)}`);
+      const response = await getCharacter(characterName);
 
       // Verify that the response status is 200
       expect(response.status).to.equal(200);
@@ -35,8 +36,13 @@ describe('Star Wars Characters Test', () => {
       // Verify that the returned character details match the expected details
       const character = response.data.results[0];
       expect(character.name).to.equal(characterName);
-      expect(character).to.have.property('height', '172');
-      expect(character).to.have.property('hair_color', 'blond');
+      expect(character.height).to.equal(characterData.height);
+      expect(character.mass).to.equal(characterData.mass);
+      expect(character.hair_color).to.equal(characterData.hair_color);
+      expect(character.skin_color).to.equal(characterData.skin_color);
+      expect(character.eye_color).to.equal(characterData.eye_color);
+      expect(character.birth_year).to.equal(characterData.birth_year);
+      expect(character.gender).to.equal(characterData.gender);
     } catch (error) {
       console.error(`An error occurred while fetching details for ${characterName}:`, error.message);
       throw error;
