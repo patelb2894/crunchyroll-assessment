@@ -1,11 +1,11 @@
 const { getCharacters, getCharacter } = require('../utils/api-utils.js');
 const { expect } = require('chai');
-const axios = require('axios');
 const { characterData } = require('../utils/constants.cjs');
 
-describe('Star Wars Characters Test', () => {
-  it('should retrieve a list of all Star Wars characters', async () => {
+describe('Star Wars Characters Test', function() {
+  it('should retrieve a list of all Star Wars characters', async function() {
     try {
+      this.timeout(10000);
       const response = await getCharacters();
       
       // Verify that the response status is 200
@@ -19,11 +19,12 @@ describe('Star Wars Characters Test', () => {
     }
   });
 
-  it('should retrieve details for a specific Star Wars character', async () => {
+  it('should retrieve details for a specific Star Wars character', async function() {
     // Specify the name of the character (e.g., Luke Skywalker)
     const characterName = 'Luke Skywalker';
 
     try {
+      this.timeout(5000);
       // Make a request to the Star Wars API for the specific character
       const response = await getCharacter(characterName);
 

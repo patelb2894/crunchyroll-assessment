@@ -1,11 +1,11 @@
-const axios = require('axios');
 const { expect } = require('chai');
 const { getFilms, getFilm } = require('../utils/api-utils');
 const {filmData} = require('../utils/constants.cjs')
 
-describe('Star Wars Films Test', () => {
-  it('should retrieve a list of all Star Wars films', async () => {
+describe('Star Wars Films Test', function() {
+  it('should retrieve a list of all Star Wars films', async function() {
     try {
+      this.timeout(10000);
       const response = await getFilms();
 
       // Verify that the response status is 200
@@ -19,8 +19,9 @@ describe('Star Wars Films Test', () => {
     }
   });
 
-  it('should retrieve details for a specific Star Wars film', async () => {
+  it('should retrieve details for a specific Star Wars film', async function() {
     try {
+      this.timeout(5000);
       const response = await getFilm(filmData.title);
 
       // Verify that the response includes the correct film details, and that only one result is returned.
