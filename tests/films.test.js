@@ -1,10 +1,11 @@
 const axios = require('axios');
 const { expect } = require('chai');
+const { getFilms } = require('../utils/api');
 
 describe('Star Wars Films Test', () => {
   it('should retrieve a list of all Star Wars films', async () => {
     try {
-      const response = await axios.get('https://swapi.dev/api/films/');
+      const response = await getFilms();
 
       // Verify that the response status is 200
       expect(response.status).to.equal(200);
